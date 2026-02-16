@@ -42,7 +42,7 @@ create table retail_sales(
 );
 ```
 
-##2. Data Exploration & Cleaning
+## 2. Data Exploration & Cleaning
 
 - **Record Count**: Determine the total number of records in the dataset.
 - **Customer Count**: Find out how many unique customers are in the dataset.
@@ -58,7 +58,7 @@ select count(*) from retail_sales;
 
 **The original CSV file contains 2000 rows, but this file has only 1997 rows because records with null values in the columns quantity, price_per_unit, cogs, and total_sales were automatically removed.
  
-##Data Exploration
+## Data Exploration
  
  ```sql
 # how many sales we have?
