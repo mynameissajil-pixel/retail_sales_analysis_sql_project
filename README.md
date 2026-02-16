@@ -20,8 +20,7 @@ This project is designed to explore, clean, and analyze retail sales data. The p
 - **Database Creation**: The project starts by creating a database named `sqlproject1`.
 - **Table Creation**: A table named `retail_sales` is created to store the sales data. The table structure includes columns for transaction ID, sale date, sale time, customer ID, gender, age, product category, quantity sold, price per unit, cost of goods sold (COGS), and total sale amount.
 
-sql
-```
+```sql
 create database sqlproject1;
 use sqlproject1;
 
@@ -50,23 +49,23 @@ create table retail_sales(
 - **Category Count**: Identify all unique product categories in the dataset.
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
-sql
-```
+```sql
 select* from retail_sales;
 select count(*) from retail_sales;
 drop table retail_sales;
 select count(*) from retail_sales;
+```
 
- # in this file the count of row is 1997 and in the csv file the count is 2000 so there null values in  quantity,  price_per_unit, cogs, total_sales 
- # it will be automaticaly deleted
+**The original CSV file contains 2000 rows, but this file has only 1997 rows because records with null values in the columns quantity, price_per_unit, cogs, and total_sales were automatically removed.
  
- # DATA EXPLORATION
+# DATA EXPLORATION
  
- # how many sales we have?
- SELECT COUNT(TOTAL_SALE) FROM RETAIL_SALES;
+ ```sql
+# how many sales we have?
+SELECT COUNT(TOTAL_SALE) FROM RETAIL_SALES;
  
- # how many unique customers we have?
- SELECT COUNT( DISTINCT CUSTOMER_ID) FROM RETAIL_SALES;
+# how many unique customers we have?
+SELECT COUNT( DISTINCT CUSTOMER_ID) FROM RETAIL_SALES;
  
 # how many categories we have?
 SELECT DISTINCT CATEGORY FROM RETAIL_SALES;
@@ -76,11 +75,14 @@ SELECT DISTINCT CATEGORY FROM RETAIL_SALES;
 
 # 1)Write a SQL query to retrieve all columns for sales made on 2022-11-05:
 
+```sql
 SELECT * FROM RETAIL_SALES WHERE SALE_DATE = "2022-11-05";
+```
 
 
 # 2)Write a SQL query to retrieve all transactions where the category is 'Clothing' and the quantity sold is more than 4 in the month of Nov-2022:
 
+```sql
 SELECT*
 FROM RETAIL_SALES
 WHERE CATEGORY= "CLOTHING" AND QUANTITY<=4
@@ -89,28 +91,35 @@ AND DATE_FORMAT(SALE_DATE, '%Y-%m') = '2022-11';
 
 ALTER TABLE RETAIL_SALES RENAME column QUANTIY TO QUANTITY;
 DESCRIBE RETAIL_SALES;
-
+```
 
 # 3)Write a SQL query to calculate the total sales (total_sale) for each category:
 
+```sql
 SELECT CATEGORY,SUM(TOTAL_SALE) AS NET_SALES,COUNT(*) AS TOTAL_ORDERS
 FROM RETAIL_SALES
 GROUP BY CATEGORY;
+```
 
 # 4)Write a SQL query to find the average age of customers who purchased items from the 'Beauty' category.
 
+```sql
 SELECT ROUND(AVG(AGE),2)
 FROM RETAIL_SALES
 WHERE CATEGORY="BEAUTY";
+```
 
 # 5)Write a SQL query to find all transactions where the total_sale is greater than 1000.:
 
+```sql
 SELECT *
 FROM RETAIL_SALES
 WHERE TOTAL_SALE > 1000;
+```
 
 # 6)Write a SQL query to find the total number of transactions (transaction_id) made by each gender in each category.:
 
+```sql
 SELECT 
 CATEGORY,
 GENDER, COUNT(*)
@@ -119,9 +128,11 @@ GROUP BY
 CATEGORY,
 GENDER
 ORDER BY 1;
+```
 
 # 7)Write a SQL query to calculate the average sale for each month. Find out best selling month in each year:
 
+```sql
 SELECT * FROM
   (
   SELECT
@@ -136,28 +147,33 @@ GROUP BY
    ) AS T1
    WHERE RANK_NO = 1;
   #ORDER BY   YEAR(SALE_DATE), AVG(TOTAL_SALE) DESC
+```
   
 # 8)Write a SQL query to find the top 5 customers based on the highest total sales 
   
+ ```sql
   SELECT 
   CUSTOMER_ID, SUM(TOTAL_SALE)
   FROM RETAIL_SALES
   group by CUSTOMER_ID
   ORDER BY SUM(TOTAL_SALE) DESC
   LIMIT 5;
+```
   
 # 9)Write a SQL query to find the number of unique customers who purchased items from each category.:
   
+  ```sql
   SELECT
   CATEGORY,
   COUNT(DISTINCT CUSTOMER_ID) AS COUNT_UNIQUE_CUSTOMERS
   FROM RETAIL_SALES
   GROUP BY 
   CATEGORY;
-  
+  ```
 # 10)Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17):
  
- WITH HOURLY_SALES
+ ```sql
+WITH HOURLY_SALES
   AS
   (SELECT *,
   CASE
@@ -171,6 +187,7 @@ SHIFT,
 COUNT(*) AS NUMBER_OF_ORDERS
 FROM HOURLY_SALES
 GROUP BY SHIFT
+```
 
 ## Findings
 
